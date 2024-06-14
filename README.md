@@ -22,12 +22,12 @@ NodeJS 中鼎鼎大名的 Koa 框架, 以其巧妙的设计, 强大的扩展能�
     self.receiveStream = [[YPPPipeStream alloc] init];
     // 连接
     [self.sendSteam subscribe:self.receiveStream];
-    
+
     // 创建发送中间件
     YPPSendMessageMiddleware *sendMiddleware = [[YPPSendMessageMiddleware alloc] init];
     // 把中间件添加到数据处理流程
     [self.sendSteam useMiddlware:sendMiddleware];
-    
+
     // 创建解析UI中间件
     YPPUITypeDispatchMiddleware *uiMiddleware = [[YPPUITypeDispatchMiddleware alloc] init];
     // 创建解析文本消息组件
@@ -40,17 +40,18 @@ NodeJS 中鼎鼎大名的 Koa 框架, 以其巧妙的设计, 强大的扩展能�
     [uiMiddleware addPredicate:picPredicate];
     // 把中间件添加到数据处理流程
     [self.receiveStream useMiddlware:uiMiddleware];
-    // 这时候吐出的数据就是可以直接上屏的 renderModel 
+    // 这时候吐出的数据就是可以直接上屏的 renderModel
     [self.receiveStream subscribeNext:^(YPPChatCellVM *data) {
         if (![data isKindOfClass:YPPChatCellVM.class]) return;
         [self.cvms addObject:data];
         [self.refreshSignal sendNext:nil];
     }];
-    
+
 }
 ```
 
 YPPSendMessageMiddleware, 代码如下:
+
 ```objc
 - (YPPMiddlewareTask *)use:(id)data {
     return [YPPMiddlewareTask excute:^(YPPMiddlewareTask * _Nonnull it) {
@@ -64,6 +65,7 @@ YPPSendMessageMiddleware, 代码如下:
     }];
 }
 ```
+
 可以看到, 中间件的核心是返回一个类似 Promise 的 task, 因此, 我们不但可以在中间件里处理同步任务
 也可以在中间件里处理异步数据
 
@@ -84,10 +86,12 @@ YPPUITypeDispatchMiddleware
     return task;
 }
 ```
+
 这是接受消息流程的中间件, 在这个中间件里可以插入子组件, 是一种非常灵活的扩充功能的方式, 通过子组件判断能不能解析
 该数据, 如果可以, 则交给子组件处理
 
 接下来我们看 YPPPipeStream
+
 ```objc
 @protocol YPPPipeStreamProtocol <NSObject>
 - (void)sendNext:(id)data;
@@ -106,6 +110,6 @@ YPPUITypeDispatchMiddleware
 
 @end
 ```
-YPPPipeStream, 既实现了 subscriber 的协议, 又实现了 signal 的相关方法, 所以既可以当做发送方也可以当做接收方, 
-这样做既可以把多个模块的处理逻辑连接起来, 又可以很好的与 ReactiveCocoa 配合, 是不是已经想到无数种场景可以实践了 :)
 
+YPPPipeStream, 可以添加多个中间件, 既实现了 subscriber 的协议, 又实现了 signal 的相关方法, 所以既可以当做发送方也可以当做接收方,
+这样做既可以把多个业务模块的处理逻辑连接起来, 又可以很好的与 ReactiveCocoa 配合, 是不是已经想到无数种场景可以实践了 :)
