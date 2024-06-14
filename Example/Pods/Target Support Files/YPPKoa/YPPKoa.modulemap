@@ -1,0 +1,6 @@
+framework module YPPKoa {
+  umbrella header "YPPKoa-umbrella.h"
+
+  export *
+  module * { export * }
+}

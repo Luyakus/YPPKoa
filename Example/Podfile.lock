@@ -1,0 +1,33 @@
+PODS:
+  - Masonry (1.1.0)
+  - ReactiveObjC (3.1.1)
+  - SDWebImage (5.19.2):
+    - SDWebImage/Core (= 5.19.2)
+  - SDWebImage/Core (5.19.2)
+  - YPPKoa (0.1.0)
+
+DEPENDENCIES:
+  - Masonry
+  - ReactiveObjC
+  - SDWebImage
+  - YPPKoa (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Masonry
+    - ReactiveObjC
+    - SDWebImage
+
+EXTERNAL SOURCES:
+  YPPKoa:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  SDWebImage: dfe95b2466a9823cf9f0c6d01217c06550d7b29a
+  YPPKoa: 3cdf4e88c82cf3b21efabf7819b461037350f130
+
+PODFILE CHECKSUM: 10e4cdc0f47f562cf61587641c34c71ccab25a36
+
+COCOAPODS: 1.15.2

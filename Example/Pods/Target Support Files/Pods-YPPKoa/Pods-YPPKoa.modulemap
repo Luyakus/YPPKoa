@@ -1,0 +1,6 @@
+framework module Pods_YPPKoa {
+  umbrella header "Pods-YPPKoa-umbrella.h"
+
+  export *
+  module * { export * }
+}

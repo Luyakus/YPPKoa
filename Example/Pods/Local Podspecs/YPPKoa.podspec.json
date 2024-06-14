@@ -1,0 +1,28 @@
+{
+  "name": "YPPKoa",
+  "version": "0.1.0",
+  "summary": "A short description of YPPKoa.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "http://git.yupaopao.com/leigaopan/yppkoa.git",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "leigaopan": "493396157@qq.com"
+  },
+  "source": {
+    "git": "git@git.yupaopao.com:leigaopan/yppkoa.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "Pods/Classes/**/*",
+  "resource_bundles": {
+    "YPPKoa": [
+      "Pods/Assets/*.png"
+    ]
+  },
+  "public_header_files": "Pods/Classes/**/*.h"
+}
